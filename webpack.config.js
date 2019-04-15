@@ -1,3 +1,4 @@
+const { ProvidePlugin, WatchIgnorePlugin } = require('webpack');
 const path = require('path');
 const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -6,21 +7,30 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+console.log(ProvidePlugin);
+
 const plugins = [
   new CleanWebpackPlugin(),
   new MiniCssExtractPlugin({
     filename: "[name].css",
   }),
+
+  new ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
 ];
 
 if (!isProduction) {
   plugins.push(
     new BrowserSyncPlugin({
-      host: 'localhost',
+      host: 'nnaimov.int',
+      proxy: 'http://nnaimov.int/portfolio/',
       port: 3000,
-      server: {
-        baseDir: ['public'],
-      },
+      open: 'local',
+      files: [
+          path.resolve('index.html'),
+      ],
     }),
   );
 }
@@ -40,8 +50,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.css', '.scss'],
     alias: {
-      '@js': path.resolve('./js'),
-      '@scss': path.resolve('./scss'),
+      '@js': path.resolve('./src/js'),
+      '@scss': path.resolve('./src/scss'),
     },
   },
 
@@ -72,6 +82,21 @@ module.exports = {
             },
           },
           'sass-loader',
+        ],
+      },
+
+      /**
+       * Handle fonts.
+       */
+      {
+        test: /fonts[\\/].*\.(eot|svg|ttf|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'fonts/[name].[ext]',
+            },
+          },
         ],
       },
     ],
