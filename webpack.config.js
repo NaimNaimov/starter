@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -32,6 +33,12 @@ if (!isProduction) {
           path.resolve('index.html'),
       ],
     }),
+
+    new WebpackBuildNotifierPlugin({
+      title: "My Project Webpack Build",
+      logo: path.resolve("./src/images/favicon/favicon-32x32.png"),
+      suppressSuccess: true
+    })
   );
 }
 

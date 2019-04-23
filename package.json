@@ -23,6 +23,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
     "file-loader": "^3.0.1",
+    "webpack-build-notifier": "^1.0.1",
     "webpack-cli": "^3.3.0"
   }
 }
