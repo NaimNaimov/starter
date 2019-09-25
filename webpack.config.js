@@ -26,7 +26,7 @@ if (!isProduction) {
   plugins.push(
     new BrowserSyncPlugin({
       host: 'nnaimov.int',
-      proxy: 'http://nnaimov.int/portfolio/',
+      proxy: 'http://nnaimov.int/starter/',
       port: 3000,
       open: 'local',
       files: [

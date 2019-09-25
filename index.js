@@ -1,2 +1,2 @@
-import '@js/alert';
-import '@scss/index';
+import './js/alert';
+import './scss/index';
