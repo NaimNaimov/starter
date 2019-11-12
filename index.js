@@ -1,2 +1,2 @@
-import './js/alert';
+import './js/main';
 import './scss/index';
